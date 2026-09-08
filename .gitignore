@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+*.so
+*.o
+*.mod
+build/
+/mon_1/
+/mon_2/
+/dimer/
+/tm_fock/
+/results/
+/run_ct_with_logging.py

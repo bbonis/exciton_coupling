@@ -1,0 +1,28 @@
+$title
+$symmetry c1
+$coord    file=coord
+$optimize
+ internal   off
+ redundant  off
+ cartesian  on
+$atoms
+    basis =cc-pVDZ
+$basis    file=basis
+$scfmo   file=mos
+$closed shells
+ a       1-16                                   ( 2 )
+$scfiterlimit       1
+$scfconv        7
+$scfdamp   start=0.300  step=0.050  min=0.100
+$scfdump
+$scfdiis
+$maxcor    500 MiB  per_core
+$scforbitalshift  automatic=.1
+$energy    file=energy
+$grad    file=gradient
+$fock
+$no-ortho
+$rundimensions
+   natoms=8
+$last step     define
+$end

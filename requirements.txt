@@ -1,0 +1,7 @@
+# Direct third-party imports; versions still need validation on the target machine.
+numpy
+pandas
+psutil
+threadpoolctl
+scipy
+matplotlib
