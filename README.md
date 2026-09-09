@@ -129,7 +129,7 @@ DISTANCE_NUMERATORS="30 40" bash run_coupling_calculations.sh
 | Setting | Meaning |
 | --- | --- |
 | `MONOMER_A`, `MONOMER_B` | Geometry-block names, each defaulting to `forma`. |
-| `DISTANCE_NUMERATORS` | Space-separated nonnegative integers divided by 10. |
+| `DISTANCE_NUMERATORS` | Space-separated nonnegative integers to be divided by 10. |
 | `CFOUR_BIN` | Optional CFOUR executable directory prepended to `PATH`. |
 | `CT_DRIVER` | Driver path; defaults to `CT_coupling_mixed_method_new_deriv_4C_final.py` in the project root. |
 | `CT_EXTRA_PYTHONPATH` | Extra colon-separated module directories inserted by the logging wrapper. |
