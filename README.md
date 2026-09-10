@@ -2,7 +2,7 @@
 
 Python and Fortran routines for calculating one-electron, two-electron, and overlap contributions between local excited states and charge-transfer states on molecular fragments A and B. A Bash launcher coordinates CFOUR calculations, TURBOMOLE Fock generation, and coupling post-processing over a distance scan.
 
-**All project source dependencies identified by static inspection are included.** The package also contains example heatmap PDFs and repeatable syntax, import, and simulated-launcher checks. A complete electronic-structure calculation has not been validated as part of this review.
+**All project source dependencies identified by static inspection are included.** The package also contains example heatmap PDFs and repeatable syntax, import, and simulated-launcher checks.
 
 ## Example results
 
