@@ -40,7 +40,6 @@ CFOUR (`xcfour`) and the expected TURBOMOLE executable (`dscf_smp_fock`) must al
 | `final_codes/calc_BAAA.py`, `calc_BBAA.py`, `calc_BBBA.py` | Python integral contractions for the three mixed-fragment categories. |
 | `final_codes/twoelint_calc_fortran.py` | Active driver backend: 198-field schema, Fortran wrappers, shared-memory binary processing, and Python fallback paths. Included exactly as last uploaded. |
 | `final_codes/twoelint_calc.py` | Binary streaming, shared AO vectors, classification, Python kernel dispatch, and reduction. |
-| `final_codes/twoelint_calc_ov_binary_2_fortran_2_og.py` | Alternative processor with Fortran wrappers and an older/smaller result schema. |
 | `twoelint_core_mod.f90` | Shared integral permutation/indexing utilities. |
 | `twoelint_{aaaa,bbbb,baaa,bbaa,bbba}_zero_copy.f90` | Five Fortran contraction modules; braces here abbreviate five actual filenames. |
 | `input_files/` | Supplied geometry, coupling settings, TURBOMOLE basis/control, and monomer AO transformations. |
@@ -170,7 +169,6 @@ Temporary dimer data include `twoel.bin` (copied from CFOUR `IIII`), `overlap.cs
 | --- | --- | --- | --- |
 | `twoelint_calc_fortran.py` | Fortran wrappers with Python fallback paths; selected by the final driver | `twoelint_f90` | 198 |
 | `twoelint_calc.py` | Python kernels | Lazily loads `twoelint_f90`, but active chunk processing calls Python | 198 |
-| `twoelint_calc_ov_binary_2_fortran_2_og.py` | Fortran wrappers with Python fallback paths | `twoelint_f90_2` | 96 |
 
 All three processors cover `12`, `13`, `14`, `21`, `23`, `24`, `31`, `32`, `34`, `41`, `42`, and `43`. Their schemas and wrapper interfaces differ. Compiling the Fortran files does not change `twoelint_calc.py` to Fortran dispatch. The final driver selects `twoelint_calc_fortran.py`. Its 198-field schema matches the field count of the Python processor; equal field counts alone do not prove numerical agreement.
 
@@ -228,14 +226,14 @@ The four launcher tests check a successful one-distance run including twelve tra
 Failures report the relevant module or test. For example, `ModuleNotFoundError: No module named 'psutil'` means that the interpreter shown by the check cannot find this dependency. In that same environment, run `python3 -m pip install -r requirements.txt`, then repeat `python3 scripts/check_project.py imports`. Existing syntax warnings can be printed even when the sources parse successfully. A passing result does not establish correct molecular energies, coupling formulas, or Python/Fortran numerical agreement.
 
 
-## Validation and remaining work
+## Validation
 
 The following results describe checks performed while preparing this package. Run the included checks on your calculation computer to verify its environment.
 
 | Check | Observed result | Scope |
 | --- | --- | --- |
 | Python and Bash syntax | Passed | Sources have valid language structure; calculation logic is not assessed. |
-| Real module imports | Partially | The three mixed Python kernels, one-electron/AO-transform modules, MO converter, and other checked modules loaded. |
+| Real module imports | Passed | The three mixed Python kernels, one-electron/AO-transform modules, MO converter, and other checked modules loaded. |
 | Simulated launcher | All four tests passed | Checked argument passing, all twelve transition-density copies, successful cleanup, early missing-driver rejection, and stopping on external-program or driver failure with available files retained. |
 | Actual input generation | Passed for six launcher modes | Both monomers in local/CT modes and dimer CFOUR/TURBOMOLE modes generated inputs; the dimer contained eight atoms. No electronic-structure program was run. |
 | Driver/backend interface | Static check passed | The active driver call uses parameters accepted by `process_file`. |
